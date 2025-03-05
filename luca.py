@@ -1,7 +1,7 @@
-from flask import Flask, send_file, request, Response, redirect, render_template, session
+from flask import *
 app = Flask(__name__)
 import os
-import re  # Import the re module for regular expressions
+import re
 import json
 from datetime import timedelta
 
@@ -9,7 +9,11 @@ app.secret_key = "lucario"
 app.permanent_session_lifetime = timedelta(minutes=200)
 
 def get_password():
-    if os.path.isfile(fname)
+    if os.path.isfile('password.txt'):
+        with open('password.txt', 'r') as file:
+            return file.read()
+    else:
+        return False
 
 def movies_info(file):
     with open(file+".json", 'r') as f:
@@ -22,24 +26,45 @@ def is_auth():
     else:
         return False
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=['GET'])
 def authenticate():
     if not(is_auth()):
-        if request.method == "POST":
-            password = request.form['password']
-            set_password = get_password()
-            if password == set_password:
-                session.permanent = True
-                session["authenticated"] = True
-                return redirect("/library")
-
-
         return render_template("landing.html", auth = is_auth())
-
     else:
         return redirect("/library")
+    
+@app.route("/password_auth", methods=['POST'])
+def password_auth():
+    auth_info = request.get_json()
+    password = auth_info['password']
+    set_password = get_password()
+    if set_password:
+        if set_password != 'No value set!':
+            if set_password == password:
+                resp = make_response(jsonify({
+                    'Access': 'Authed', 
+                                }))
+                session['authenticated'] = True
+                resp.headers['Access-Control-Allow-Origin'] = '*'
+                return resp
+            else:
+                resp = make_response(jsonify({
+                    'Access': 'Invalid password', 
+                                }))
+                return resp
+        else:
+            resp = make_response(jsonify({
+                    'Access': 'Set password', 
+                                }))
+            return resp
+    else:
+        resp = make_response(jsonify({'Access' : 'Password set'}))
+        with open('password.txt', 'w') as file:
+            file.write("No value set!")
+        return resp
 
-@app.route("/logout", methods=['GET', 'POST'])
+
+@app.route("/logout", methods=['GET'])
 def logout():
     session.clear()
     return redirect("/")
@@ -71,7 +96,7 @@ def movie(name):
 def get_video(name):
     if is_auth():
 
-            path = f"Movies/{name}.mp4"  # Update this with the path to your MP4 file
+            path = f"Movies/{name}.mp4"
             if not os.path.exists(path):
                 return "<h1>Video not found.</h1>", 404
 
@@ -117,4 +142,4 @@ def get_video(name):
         return redirect("/")
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)

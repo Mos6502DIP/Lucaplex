@@ -1,2 +1,2 @@
 # Lucaplex
- Media Server fro Movies and tv
+ This a media server :3

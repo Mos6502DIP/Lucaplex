@@ -2,16 +2,19 @@
 
 {% block page_name %}Landing{% endblock %}
 
+{% block head %}
+    <script src={{url_for('static', filename='auth.js')}}></script>
+{% endblock %}
+
 {% block content %}
     <div class="centered">
         <h1>Password</h1>
-        <form method="post">
-            <div class="ui action input">
-              <input type="Password" placeholder="Enter" name="password">
-              <button class="ui button" type="submit">Enter</button>
-            </div>
-        </form>
+        
+        <input id="password" type="Password" placeholder="Enter" name="password">
+        <button class="ui button" onclick="auth_password()">Enter</button>
+            
+       
         <br>
-        <p class="warning_text">Unauthorised access is illegal.</p>
+        <p id="message_text"></p>
     </div>
 {% endblock %}
