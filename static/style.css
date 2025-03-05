@@ -1,0 +1,99 @@
+html {
+    min-height: 100% !important;
+}
+
+
+body {
+    background: rgb(2, 0, 36);
+    min-height: 100% !important;
+    background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+
+
+}
+
+.centered {
+    text-align: center;
+
+
+}
+
+.logo {
+    text-align: center;
+    font-size: 70px;
+    background: -webkit-linear-gradient(#020024, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #000000;
+
+}
+
+.ui.menu {
+    background-color: #000000;
+    opacity: 0.5;
+
+}
+
+.warning_text {
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    font-size: 25px;
+}
+
+.iframe {
+    border: 2px solid #00cdf9;
+    border-radius: 15px;
+    width: 100%;
+    height: 45vh;
+}
+
+.sidebar {
+    width: 300px;
+    height: calc(100vh - 170px); /* Adjust height to account for navbar */
+    background-color: rgba(0, 0, 0, 0.7); /* Black with 70% opacity */
+    border-radius: 15px; /* Rounded edges */
+    padding: 20px;
+    box-sizing: border-box;
+    position: fixed;
+    right: 0; /* Position the sidebar to the right */
+    top: 170px; /* Start the sidebar below the navbar */
+    color: white; /* White text color for contrast */
+    overflow-y: auto; /* Scrollable content if it overflows */
+    z-index: 900; /* Ensure the sidebar is below the navbar */
+}
+
+.sidebar h1, .sidebar h2 {
+    margin-top: 0;
+}
+
+.movie-info {
+    margin-top: 20px;
+}
+
+.movie-poster {
+    width: 100%;
+    border-radius: 10px; /* Rounded edges for the poster */
+}
+
+.movie-info p {
+    margin: 5px 0;
+}
+
+.movie {
+
+    margin-right: 320px; /* Space for the sidebar on the right */
+    padding: 20px;
+
+    z-index: 800; /* Ensure the movie content is below the sidebar */
+}
+
+
+
+@media (max-width: 920px) {
+    .sidebar {
+        display: none;
+    }
+    .movie {
+        margin-right: 20px; /* Remove the right margin for movie content */
+    }
+}

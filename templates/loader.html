@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+    <title>Enter name</title>
+{% endblock %}
+
+{% block page_name %}Libary{% endblock %}
+
+{% block content %}
+    <h1>Movies</h1>
+    <ul>
+            <div class="ui link cards">
+                {% for item in movie_data %}
+
+                  <div class="ui card">
+                    <a class="image" href="/movie/{{ item }}">
+                        {% set image = "media/" + movie_data[item]["Thumbnail"] %}
+
+                        <img src="{{url_for('static', filename=image)}}">
+                    </a>
+                    <div class="content">
+                      <a class="header" href="/movie/{{ item }}">{{ item }}</a>
+                      <div class="meta">
+                        <a>Runtime {{ movie_data[item]["Length"] }}</a>
+                      </div>
+                      <div class="description">
+                        {{ movie_data[item]["Description"] }}
+                      </div>
+                    </div>
+                    <div class="extra content">
+                      <span class="right floated">
+                        Year {{ movie_data[item]["Year"] }}
+                      </span>
+                      <span>
+                        <i class="film icon"></i>
+                        Rated: {{ movie_data[item]["Rated"] }}
+                      </span>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+    </ul>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script src={{url_for('static', filename='movie_loader.js')}}></script>
+{% endblock %}
+
+{% block page_name %}{{movie_name}}{% endblock %}
+
+{% block content %}
+    <div class="sidebar">
+            <h2>{{movie_name}}</h2>
+            <img src="{{ url_for('static', filename="media/"+movie_data["Poster"])}}" alt="Movie Poster" class="movie-poster">
+            <p><strong>Tags:</strong>{% for tag in movie_data["Tags"] %}{{ " " }}{{ tag.capitalize() }},{% endfor %}</p>
+            <p><strong>Year:</strong>{{ movie_data["Year"]}}</p>
+            <p><strong>Age Rating: </strong>{{ movie_data["Rated"]}}</p>
+            <p><strong>Runtime: </strong>{{ movie_data["Length"]}}</p>
+            <p><strong>Description:</strong><br>{{ movie_data["Description"]}}</p>
+        </div>
+
+    </div>
+
+    <div class="movie">
+        <h1>{{movie_name}}</h1>
+        <iframe src="/video_load/{{movie_name}}" id="videoIframe" class="iframe" ></iframe>
+
+    </div>
+{% endblock %}

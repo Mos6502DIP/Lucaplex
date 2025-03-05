@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_name %}Landing{% endblock %}
+
+{% block content %}
+    <div class="centered">
+        <h1>Password</h1>
+        <form method="post">
+            <div class="ui action input">
+              <input type="Password" placeholder="Enter" name="password">
+              <button class="ui button" type="submit">Enter</button>
+            </div>
+        </form>
+        <br>
+        <p class="warning_text">Unauthorised access is illegal.</p>
+    </div>
+{% endblock %}
