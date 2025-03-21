@@ -8,6 +8,10 @@ from datetime import timedelta
 app.secret_key = "lucario"
 app.permanent_session_lifetime = timedelta(minutes=200)
 
+def set_password_txt(password):
+    with open('password.txt', 'w') as file:
+        file.write(password)
+
 def get_password():
     if os.path.isfile('password.txt'):
         with open('password.txt', 'r') as file:
@@ -53,6 +57,7 @@ def password_auth():
                                 }))
                 return resp
         else:
+            set_password_txt(password)
             resp = make_response(jsonify({
                     'Access': 'Set password', 
                                 }))
@@ -62,7 +67,6 @@ def password_auth():
         with open('password.txt', 'w') as file:
             file.write("No value set!")
         return resp
-
 
 @app.route("/logout", methods=['GET'])
 def logout():
